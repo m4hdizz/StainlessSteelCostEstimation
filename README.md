@@ -253,3 +253,12 @@ Otherwise use the closest defensible comparable or AUD/kg rate.
 Do not present an estimated value as an exact catalog price.
 Do not invent a price if the database does not contain a defensible comparable.
 ```
+
+
+## Master AI prompt
+
+For a ready-to-use instruction set for ChatGPT, Claude, or another AI assistant, use:
+
+**[PROMPT.md](PROMPT.md)**
+
+This prompt includes BOM extraction from Excel, drawings, photos and PDFs, exact-match-first pricing, AUD/kg fallback logic, accuracy/deviation reporting, no-follow-up first-pass estimation, and first-response Excel delivery.
