@@ -59,3 +59,115 @@ This allows the estimator to use exact product pricing where available, or deriv
 - Exact-match-first estimation logic
 
 The database is intended for engineering budgeting and cost-estimation reference. It is not a supplier quotation.
+
+
+## How to use with ChatGPT
+
+1. Download or open the Markdown cost database from this repository.
+2. Upload the Markdown file to ChatGPT, or provide the repository/file link if your ChatGPT setup can access it.
+3. Tell ChatGPT to use the database as the primary pricing reference.
+4. Ask for the item you want to estimate, including as much detail as possible:
+   - Item type
+   - Material grade
+   - Size
+   - Schedule / wall thickness
+   - Pressure class
+   - Weight
+   - Quantity
+5. Require ChatGPT to return:
+   - Exact match or closest comparable
+   - Reference item/category
+   - AUD/kg rate
+   - Estimated unit cost
+   - Estimated total cost
+   - Accuracy score
+   - Size, material, weight and specification deviations
+
+### Example ChatGPT prompt
+
+```text
+Use the Stainless Steel Cost Estimation Reference Database as the primary cost source.
+
+Estimate the cost of:
+8" 316L Sch 40 90° elbow
+Weight: 12 kg
+Quantity: 4
+
+If there is an exact match, use the exact catalog price.
+If there is no exact match, use the closest comparable item or AUD/kg rate.
+
+Return:
+- Match level
+- Reference item
+- Reference AUD/kg
+- Estimated unit cost
+- Estimated total cost
+- Accuracy score
+- Size deviation
+- Material deviation
+- Weight deviation
+- Specification deviation
+
+Do not present an estimated value as an exact catalog price.
+```
+
+## How to use with Claude
+
+1. Download the Markdown database from this repository.
+2. Upload the Markdown file to Claude as a project file or conversation attachment.
+3. Instruct Claude to treat the file as the primary cost-estimation reference.
+4. Ask for the required component with material, size, specification, weight and quantity.
+5. Require Claude to follow the same exact-match-first and deviation-reporting rules.
+
+### Example Claude prompt
+
+```text
+Use the attached Stainless Steel Cost Estimation Reference Database as the primary pricing source.
+
+Estimate:
+6" 316L Class 150 weld-neck flange
+Weight: 8.5 kg
+Quantity: 6
+
+Use an exact catalog match if available.
+Otherwise use the closest detailed category + grade + size-band rate.
+
+Show:
+- Match level
+- Reference product/category
+- AUD/kg
+- Unit cost
+- Total cost
+- Accuracy score
+- Size deviation
+- Material deviation
+- Weight deviation
+- Specification deviation
+- Short explanation of the estimate basis
+
+Do not invent a price if the database does not contain a defensible comparable.
+```
+
+## Recommended AI instruction
+
+For consistent results in ChatGPT or Claude, use this instruction at the start of the conversation:
+
+```text
+Use this database as a cost-estimation reference only.
+
+Priority:
+1. Exact catalog match
+2. Near-exact product match
+3. Detailed category + grade + size-band rate
+4. Family + grade + size-band rate
+5. Weak comparable only when no better data exists
+
+For every non-exact estimate:
+- Report the selected reference
+- Report AUD/kg
+- Calculate estimated cost
+- Give an accuracy score from 0 to 100
+- State size, material, weight and specification deviations
+- Clearly label the result as an estimate
+- Do not invent missing prices
+```
