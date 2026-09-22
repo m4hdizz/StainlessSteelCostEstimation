@@ -96,3 +96,39 @@ Rules:
 ```
 
 For the full detailed AI instruction set, use **[PROMPT.md](PROMPT.md)**.
+
+
+## Files to use with ChatGPT or Claude
+
+For reliable cost estimation, use these two repository files together:
+
+1. **PROMPT.md**: the AI operating instructions.
+2. **data/StainlessSteel_AI_Cost_Estimation.md**: the full pricing reference database containing the 6,875 product records, exact catalog prices, weights, AUD/kg rates, grades, sizes, categories and source URLs.
+
+For each actual estimate, also provide the job-specific input such as an Excel BOM, drawing, PDF, photo, isometric or material list.
+
+### Normal chat
+
+At the start of a new ChatGPT or Claude conversation:
+
+1. Upload or attach `PROMPT.md`.
+2. Upload or attach `data/StainlessSteel_AI_Cost_Estimation.md`.
+3. Upload the job-specific Excel/drawing/PDF/BOM.
+4. Ask the AI to follow `PROMPT.md` and use the pricing database as the primary cost reference.
+
+### Project setup
+
+For repeated use, create a dedicated Project in ChatGPT or Claude and add these files to the Project knowledge/files:
+
+- `PROMPT.md`
+- `data/StainlessSteel_AI_Cost_Estimation.md`
+
+Then keep the master pricing database and prompt in the Project permanently. For each estimate, upload only the new job-specific Excel, drawing, PDF, photo or BOM to the conversation.
+
+Recommended Project instruction:
+
+```text
+Follow PROMPT.md for all cost-estimation work.
+Use data/StainlessSteel_AI_Cost_Estimation.md as the primary pricing reference.
+When I provide a job file, produce the first-pass estimate immediately and return the completed Excel workbook in the first response.
+```
