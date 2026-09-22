@@ -47,3 +47,62 @@ Follow this sequence:
 8. If an item cannot be priced reliably from the database, state this clearly and do not invent a value.
 
 For **Excel files**, use workbook tables and sheets as the primary source, preserve original row/item references where practical, consolidate BOM information carefully, and avoid double-counting duplicate lines.
+
+
+## First-Response Excel Output Rule
+
+When the user supplies an **Excel file, photo, drawing, PDF, piping isometric, GA drawing, fabrication drawing, marked-up image, or other BOM source**, the AI must complete the first-pass estimate immediately and provide the result as an **Excel workbook in the first response**.
+
+Do **not** ask clarification or follow-up questions before producing the first estimate.
+
+If information is missing, unreadable, ambiguous, or incomplete:
+
+1. Use the best defensible interpretation from the supplied file.
+2. Make only reasonable engineering assumptions.
+3. Reduce the accuracy score where uncertainty exists.
+4. Record the assumption or uncertainty in the output.
+5. Continue the estimate rather than stopping the workflow.
+
+### Excel source preservation
+
+If the original user input is Excel:
+
+- Preserve all original worksheets unless technically unnecessary.
+- Preserve all original columns and values.
+- Do not overwrite source data.
+- Preserve original row/item references where practical.
+- Add cost-estimation columns to the **right of the original source columns**.
+- Avoid duplicate counting when combining BOM information.
+
+Recommended appended columns:
+
+| Added Column | Purpose |
+|---|---|
+| Match Level | Exact / Near-exact / Detailed rate / Family rate / Weak comparable |
+| Reference Item | Product or closest comparable used |
+| Reference Category | Detailed source category |
+| Reference Grade | Reference material grade |
+| Reference Size Band | Reference size grouping |
+| Reference AUD/kg | Selected ex-GST unit rate |
+| Estimated Weight kg | Weight used for estimating |
+| Estimated Unit Cost AUD | Estimated unit cost ex GST |
+| Quantity | Quantity used |
+| Estimated Total AUD | Quantity × unit cost |
+| Accuracy Score | 0-100 similarity/confidence score |
+| Accuracy Label | Very High / High / Moderate / Low / Very Low |
+| Size Deviation % | Difference from selected reference |
+| Material Deviation | Exact / variant / related grade / different alloy |
+| Weight Deviation % | Difference from selected reference |
+| Specification Deviation | Schedule, wall, class, finish, standard, etc. |
+| Estimation Basis | Short explanation of rate/match selection |
+| Notes | Missing data, assumptions, unreadable values, cautions |
+
+### Required delivery behavior
+
+The first AI response should include:
+
+- The completed Excel file for download.
+- A brief summary of total estimated cost and any major uncertainty.
+- No request for further information before delivering the first-pass workbook.
+
+Any unresolved assumptions should be recorded inside the workbook rather than blocking delivery.
