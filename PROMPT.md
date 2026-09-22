@@ -142,3 +142,40 @@ Requirements:
 - Do not ask follow-up questions before producing the estimate.
 - Show accuracy and deviations for all non-exact matches.
 - Do not invent prices.
+
+
+## Required project files
+
+This prompt must be used together with the pricing reference file:
+
+`data/StainlessSteel_AI_Cost_Estimation.md`
+
+The pricing reference file is the primary source for:
+
+- Exact catalog prices
+- Product weights
+- AUD/kg reference rates
+- Product category and family rates
+- Material grades
+- Size bands
+- Product specifications
+- Source/reference URLs
+
+Do not treat `README.md`, `index.md`, or this prompt itself as the pricing database.
+
+### Recommended ChatGPT / Claude Project setup
+
+Add these two files to the Project knowledge/files:
+
+1. `PROMPT.md`
+2. `data/StainlessSteel_AI_Cost_Estimation.md`
+
+Keep these files in the Project for repeated use.
+
+For each new estimate, the user only needs to provide the job-specific Excel file, drawing, PDF, photo, isometric, fabrication drawing or BOM.
+
+When both project files are available:
+- Follow `PROMPT.md`.
+- Search the pricing database first.
+- Use exact catalog evidence before derived AUD/kg rates.
+- Produce the first-pass Excel estimate without asking follow-up questions first.
