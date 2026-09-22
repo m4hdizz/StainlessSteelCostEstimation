@@ -171,3 +171,85 @@ For every non-exact estimate:
 - Clearly label the result as an estimate
 - Do not invent missing prices
 ```
+
+
+## Excel output requirement
+
+When the user provides an Excel file, drawing, PDF, photo, isometric, GA, fabrication drawing, marked-up image, or other BOM source, the AI must **produce the completed Excel estimate in the first response**.
+
+Do not ask follow-up questions before producing the first estimate. Use the best defensible interpretation of the supplied data, make reasonable assumptions where necessary, and clearly record uncertainty in the output.
+
+### Excel structure
+
+For an original Excel workbook:
+
+- Keep all original worksheets unless there is a strong reason not to.
+- Keep all original columns unchanged.
+- Keep original row/item references where possible.
+- Add estimation columns to the **right side of the original data**.
+- Do not overwrite the user's source data.
+- Avoid duplicate counting when consolidating BOM lines.
+
+Recommended added columns:
+
+- `Match Level`
+- `Reference Item`
+- `Reference Category`
+- `Reference Grade`
+- `Reference Size Band`
+- `Reference AUD/kg`
+- `Estimated Weight kg`
+- `Estimated Unit Cost AUD`
+- `Quantity`
+- `Estimated Total AUD`
+- `Accuracy Score`
+- `Accuracy Label`
+- `Size Deviation %`
+- `Material Deviation`
+- `Weight Deviation %`
+- `Specification Deviation`
+- `Estimation Basis`
+- `Notes`
+
+If some source fields are missing or unclear, do not stop the workflow. Add the best estimate possible, reduce the accuracy score as required, and explain assumptions in `Notes` / `Estimation Basis`.
+
+The first AI reply should include the resulting Excel workbook as a downloadable file.
+
+### Updated sample prompt
+
+```text
+Use the Stainless Steel Cost Estimation Reference Database as the primary cost source.
+
+If I provide an Excel file, drawing, PDF, photo, isometric, GA, fabrication drawing, marked-up image, or BOM:
+- First extract/reconstruct the BOM.
+- Do not ask follow-up questions before producing the first estimate.
+- Use the best defensible assumptions and flag uncertainty.
+- Preserve all original Excel columns and data.
+- Add estimation columns to the right of the original data.
+- Return the completed result as an Excel file in your first response.
+
+For each item, return:
+- Match Level
+- Reference Item
+- Reference Category
+- Reference Grade
+- Reference Size Band
+- Reference AUD/kg
+- Estimated Weight kg
+- Estimated Unit Cost AUD
+- Quantity
+- Estimated Total AUD
+- Accuracy Score
+- Accuracy Label
+- Size Deviation %
+- Material Deviation
+- Weight Deviation %
+- Specification Deviation
+- Estimation Basis
+- Notes
+
+Use an exact catalog match if available.
+Otherwise use the closest defensible comparable or AUD/kg rate.
+Do not present an estimated value as an exact catalog price.
+Do not invent a price if the database does not contain a defensible comparable.
+```
